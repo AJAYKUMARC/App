@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using App.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace App.Controllers
@@ -11,6 +12,11 @@ namespace App.Controllers
         public IActionResult Index()
         {
             return View();
+        }
+
+        public IActionResult TransactionView()
+        {
+            return View(new TransactionViewModel());
         }
     }
 }
