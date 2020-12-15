@@ -2,13 +2,21 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using App.Services;
 using App.ViewModels;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace App.Controllers
 {
     public class DashboardController : Controller
     {
+        public readonly ITransactionService transactionService;
+        public DashboardController(ITransactionService transactionService)
+        {
+            this.transactionService = transactionService;
+        }
         public IActionResult Index()
         {
             return View();
@@ -16,7 +24,19 @@ namespace App.Controllers
 
         public IActionResult TransactionView()
         {
-            return View(new TransactionViewModel());
+            IList<SelectListItem> productList = transactionService.GetProduct();
+            return View(new TransactionViewModel { Input = new InputViewModel { ProdutNumber = productList } });
+        }
+
+        public IActionResult GetTansactions(InputViewModel input, IFormCollection ddlList)
+        {
+            IList<SelectListItem> productList = transactionService.GetProduct();
+            IList<GridViewModel> transactions = transactionService.GetTranscations(input);
+            return View("TransactionView", new TransactionViewModel
+            {
+                Input = new InputViewModel { ProdutNumber = productList },
+                GridView = transactions
+            });
         }
     }
 }

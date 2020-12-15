@@ -9,6 +9,6 @@ namespace App.ViewModels
     public class TransactionViewModel
     {
         public InputViewModel Input { get; set; }
-        public GridViewModel GridView { get; set; }
+        public IList<GridViewModel> GridView { get; set; }
     }
 }

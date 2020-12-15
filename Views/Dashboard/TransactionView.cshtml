@@ -4,6 +4,9 @@
     Layout = "~/Views/Shared/_LayoutDash.cshtml";
 }
 
-@*@await Html.PartialAsync("_AuthorPartial", Model.AuthorName)*@
-@await Html.PartialAsync("_InputView")
-@await Html.PartialAsync("_GridView")
+@await Html.PartialAsync("_InputView", Model.Input)
+@if (Model.GridView != null)
+{
+    @await Html.PartialAsync("_GridView", Model.GridView)
+}
+
