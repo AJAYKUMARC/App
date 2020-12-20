@@ -12,7 +12,16 @@
                 </div>
 
                 <form class="form-horizontal form-label-left" novalidate="" asp-action="GetTansactions" asp-controller="Dashboard" method="post">
-
+                    <div class="col-sm-4">
+                        Environment
+                        <div class="form-group">
+                            <select name="Environment" class="form-control">
+                                <option>Env-1</option>
+                                <option>Env-2</option>
+                            </select>
+                                 
+                        </div>
+                    </div>
                     <div class="x_content">
                         <div class="container">
                             <div class="row">
@@ -28,7 +37,7 @@
                                 <div class="col-sm-4">
                                     Product Number
                                     <div class="form-group">
-                                        @Html.DropDownList("ProductSelected", Model.ProdutNumber, "None", new { @class = "form-control" });
+                                        @Html.DropDownList("ProductSelected", Model.ProdutNumber, "None", new { @class = "form-control" })
                                     </div>
                                 </div>
 

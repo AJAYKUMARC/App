@@ -12,5 +12,6 @@ namespace App.ViewModels
         public string ProductSelected { get; set; }
         public string AccountNumber { get; set; }
         public string TransactionDate { get; set; }
+        public string Environment { get; set; }
     }
 }

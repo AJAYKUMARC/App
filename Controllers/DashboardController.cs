@@ -28,15 +28,21 @@ namespace App.Controllers
             return View(new TransactionViewModel { Input = new InputViewModel { ProdutNumber = productList } });
         }
 
-        public IActionResult GetTansactions(InputViewModel input, IFormCollection ddlList)
+        public IActionResult GetTansactions(InputViewModel input)
         {
             IList<SelectListItem> productList = transactionService.GetProduct();
-            IList<GridViewModel> transactions = transactionService.GetTranscations(input);
+            IList<GridViewModel> transactions = transactionService.GetTransactions(input);
             return View("TransactionView", new TransactionViewModel
             {
                 Input = new InputViewModel { ProdutNumber = productList },
                 GridView = transactions
             });
+        }
+
+        public IActionResult ViewJobs()
+        {
+            List<JobsViewModel> jobs = transactionService.GetJobsInfo();
+            return View(jobs);
         }
     }
 }

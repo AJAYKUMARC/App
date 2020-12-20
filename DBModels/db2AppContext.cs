@@ -4,13 +4,13 @@
 
 namespace App.DBModels
 {
-    public partial class dbAppContext : DbContext
+    public partial class db2AppContext : DbContext
     {
-        public dbAppContext()
+        public db2AppContext()
         {
         }
 
-        public dbAppContext(DbContextOptions<dbAppContext> options)
+        public db2AppContext(DbContextOptions<db2AppContext> options)
             : base(options)
         {
         }

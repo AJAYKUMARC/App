@@ -29,6 +29,9 @@ namespace App
             services.AddDbContext<dbAppContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<db2AppContext>(options =>
+                options.UseSqlServer(
+                    Configuration.GetConnectionString("Db2Connection")));
             services.AddControllersWithViews();
             services.AddScoped<ITransactionService, TransactionService>();
         }

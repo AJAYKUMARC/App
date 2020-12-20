@@ -10,6 +10,7 @@ namespace App.Services
     public interface ITransactionService
     {
         IList<SelectListItem> GetProduct();
-        IList<GridViewModel> GetTranscations(InputViewModel input);
+        IList<GridViewModel> GetTransactions(InputViewModel input);
+        List<JobsViewModel> GetJobsInfo();
     }
 }
