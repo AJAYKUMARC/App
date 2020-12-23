@@ -7,6 +7,7 @@ namespace App.ViewModels
 {
     public class GridViewModel
     {
+        public int TransId { get; set; }
         public string AccountNumber { get; set; }
         public string ProductNumber { get; set; }
         public decimal TransactionAmount { get; set; }

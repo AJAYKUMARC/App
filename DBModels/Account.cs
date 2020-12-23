@@ -8,6 +8,7 @@ namespace App.DBModels
     public partial class Account
     {
         public string AccountId { get; set; }
+        public int TransId { get; set; }
         public string CustomerId { get; set; }
         public string ProdId { get; set; }
         public string TransDesc { get; set; }

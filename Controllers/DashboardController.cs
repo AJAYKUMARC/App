@@ -44,5 +44,10 @@ namespace App.Controllers
             List<JobsViewModel> jobs = transactionService.GetJobsInfo();
             return View(jobs);
         }
+
+        public IActionResult TestJQuery()
+        {
+            return View("Index1");
+        }
     }
 }

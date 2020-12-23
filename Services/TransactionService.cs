@@ -69,6 +69,7 @@ namespace App.Services
             {
                 context.TransactionLogs.Add(transactionLog);
                 var saved = context.SaveChanges();
+
                 var query = context.Accounts.AsQueryable();
 
                 if (!string.IsNullOrEmpty(input.AccountNumber))
@@ -81,6 +82,7 @@ namespace App.Services
                 }
                 var result = query.Select(x => new GridViewModel
                 {
+                    TransId = x.TransId,
                     AccountNumber = x.AccountId,
                     ProductNumber = x.ProdId,
                     TransactionAmount = x.TransAmt,
@@ -110,6 +112,7 @@ namespace App.Services
                 }
                 var result = query.Select(x => new GridViewModel
                 {
+                    TransId = x.TransId,
                     AccountNumber = x.AccountId,
                     ProductNumber = x.ProdId,
                     TransactionAmount = x.TransAmt,
