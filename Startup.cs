@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using App.DBModels;
+using App.Helpers;
 using App.Services;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -11,11 +13,13 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Options;
 
 namespace App
 {
     public class Startup
     {
+        public const string CookieScheme = "YourSchemeName";
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -26,6 +30,17 @@ namespace App
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme) // Sets the default scheme to cookies
+               .AddCookie(options =>
+               {
+                   options.AccessDeniedPath = "/Login/AccessDenied";
+                   options.LoginPath = "/Login/Index";
+                   options.Cookie.Name = "AppCookie";
+               });
+
+            // Example of how to customize a particular instance of cookie options and
+            // is able to also use other services.
+            services.AddSingleton<IConfigureOptions<CookieAuthenticationOptions>, ConfigureAppCookie>();
             services.AddDbContext<dbAppContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
@@ -54,9 +69,9 @@ namespace App
             app.UseStaticFiles();
 
             app.UseRouting();
-
+            app.UseAuthentication();
             app.UseAuthorization();
-
+            app.UseCookiePolicy();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(

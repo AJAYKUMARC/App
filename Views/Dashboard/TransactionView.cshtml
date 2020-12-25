@@ -1,11 +1,11 @@
-﻿@model App.ViewModels.TransactionViewModel;
-@{
-    ViewData["Title"] = "TransactionView";
-    Layout = "~/Views/Shared/_LayoutDash.cshtml";
-}
+﻿@model App.ViewModels.TransactionViewModel; 
+    @{
+        ViewData["Title"] = "TransactionView";
+        Layout = "~/Views/Shared/_LayoutDash.cshtml";
+    }
 
-@await Html.PartialAsync("_InputView", Model.Input)
-@if (Model.GridView != null)
-{
-    @await Html.PartialAsync("_GridView", Model.GridView)
-}
+    @await Html.PartialAsync("_InputView", Model.Input)
+    @if (Model.GridView != null)
+    {
+        @await Html.PartialAsync("_GridView", Model.GridView)
+    }

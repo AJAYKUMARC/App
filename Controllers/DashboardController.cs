@@ -4,12 +4,14 @@ using System.Linq;
 using System.Threading.Tasks;
 using App.Services;
 using App.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace App.Controllers
 {
+    [Authorize]
     public class DashboardController : Controller
     {
         public readonly ITransactionService transactionService;

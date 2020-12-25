@@ -16,7 +16,7 @@ namespace App.Services
             const string LDAP_PATH = "EX://exldap.example.com:5555";
             const string LDAP_DOMAIN = "exldap.example.com:5555";
 
-            using (var context = new PrincipalContext(ContextType.Domain, LDAP_DOMAIN, "service_acct_user", "service_acct_pswd"))
+            using (var context = new PrincipalContext(ContextType.Domain, LDAP_DOMAIN, username, password))
             {
                 if (context.ValidateCredentials(username, password))
                 {
