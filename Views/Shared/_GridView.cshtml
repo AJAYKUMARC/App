@@ -2,7 +2,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 <script>
-    $(document).ready(function () {      
+    $(document).ready(function () {
         $('#checkTrans').click(function (e) {
             $(this).closest('table').find('td input:checkbox').prop('checked', this.checked);
         });
@@ -10,8 +10,7 @@
 
     $(document).ready(function () {
         $(".checkbox").click(function () {
-            if ($("#datatable input:checkbox:checked").length > 0)
-            {
+            if ($("#datatable input:checkbox:checked").length > 0) {
                 $('#exportAction').show();
             }
             else {
@@ -19,6 +18,43 @@
             }
         });
     });
+
+    $(document).on("click", ".export", function () {
+        var report = new Array();
+        $("#datatable input:checkbox:checked").each(function () {
+            var rec = {};
+            if ($(this).attr("id") > 0) {
+                rec.Id = $(this).attr("id");
+                report.push(rec);
+            }
+        });
+        var temprec = {};
+        temprec.Id = '100';
+        report.push(temprec);
+        if (report.length > 0)
+        {
+            var reportRes = JSON.stringify(report);
+            console.log(report);
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("ExportData", "Dashboard")',
+                data: {
+                    "reportRes": report
+                },
+                contentType: 'application/json; charset=utf-8"',
+                dataType: 'json',
+            success: function (result) {
+                alert('Success ');
+            },
+            error: function (result) {
+                alert('Fail ');
+            }
+        });
+        }
+
+    });
+
+
 
 </script>
 
@@ -52,7 +88,7 @@
                                         @foreach (var item in Model)
                                         {
                                             <tr role="row" class="even">
-                                                <td width="2%"><input type="checkbox" id="@item.TransId" class="checkbox"></td>
+                                                <td width="2%"><input type="checkbox" id="@item.TransId" class="checkbox chk"></td>
                                                 <td class="sorting_1">@item.AccountNumber</td>
                                                 <td>@item.ProductNumber</td>
                                                 <td>@item.TransactionAmount</td>
@@ -67,8 +103,8 @@
                     </div>
                     <div class="form-group" id="exportAction" hidden>
                         <div class="col-md-12">
-                            <button id="send" type="submit" class="btn btn-success">Export as Excel</button>
-                            <button id="send" type="submit" class="btn btn-success">Send as Attachment</button>
+                            <button id="export" type="submit" class="btn btn-success export">Export as Excel</button>
+                            <button id="sendAtttachment" type="submit" class="btn btn-success export">Send as Attachment</button>
                         </div>
                     </div>
                 </div>

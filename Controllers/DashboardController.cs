@@ -46,10 +46,10 @@ namespace App.Controllers
             List<JobsViewModel> jobs = transactionService.GetJobsInfo();
             return View(jobs);
         }
-
-        public IActionResult TestJQuery()
-        {
-            return View("Index1");
+        
+        public bool ExportData(List<Report> reportRes)
+         {
+            return true;
         }
     }
 }
